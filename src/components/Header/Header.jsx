@@ -1,6 +1,7 @@
 import { MdLocationOn } from "react-icons/md";
 import { HiCalendar, HiMinus, HiPlus, HiSearch } from "react-icons/hi";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 function Header() {
   const [destination, setDestination] = useState("");
@@ -38,15 +39,16 @@ function Header() {
           <span className="seperator"></span>
         </div>
         <div className="headerSearchItem">
-          <div
-            id="optionDropDown"
-            onClick={() => setIsOptionsOpen(!isOptionsOpen)}
-          >
+          <div id="optionDropDown" onClick={() => setIsOptionsOpen(true)}>
             {options.adult} adult &bull; {options.children} children &bull;{" "}
             {options.room} room
           </div>
           {isOptionsOpen && (
-            <GuestOptionsList options={options} handleOptions={handleOptions} />
+            <GuestOptionsList
+              options={options}
+              handleOptions={handleOptions}
+              setIsOptionsOpen={setIsOptionsOpen}
+            />
           )}
           <span className="seperator"></span>
         </div>
@@ -62,9 +64,11 @@ function Header() {
 
 export default Header;
 
-function GuestOptionsList({ options, handleOptions }) {
+function GuestOptionsList({ options, handleOptions, setIsOptionsOpen }) {
+  const optionsRef = useRef();
+  useOutsideClick(optionsRef, "optionDropDown", () => setIsOptionsOpen(false));
   return (
-    <div className="guestOptions">
+    <div className="guestOptions" ref={optionsRef}>
       <OptionItem
         handleOptions={handleOptions}
         type={"adult"}
