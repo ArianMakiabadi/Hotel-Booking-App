@@ -2,12 +2,16 @@ import { MdLocationOn } from "react-icons/md";
 import { HiCalendar, HiMinus, HiPlus, HiSearch } from "react-icons/hi";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import "react-date-range/dist/styles.css"; // main style file (react-date-range)
+import "react-date-range/dist/theme/default.css"; // theme css file (react-date-range)
+import { DateRange } from "react-date-range";
+import { format } from "date-fns";
 
 function Header() {
   const [destination, setDestination] = useState("");
+
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [options, setOptions] = useState({ adult: 1, children: 0, room: 1 });
-
   const handleOptions = (key, operation) => {
     setOptions((prev) => {
       return {
@@ -16,6 +20,18 @@ function Header() {
       };
     });
   };
+
+  const [isDateOpen, setIsDateOpen] = useState(false);
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const dateRef = useRef();
+  useOutsideClick(dateRef, "dateDropdown", () => setIsDateOpen(false));
 
   return (
     <div className="header">
@@ -35,7 +51,26 @@ function Header() {
         </div>
         <div className="headerSearchItem">
           <HiCalendar className="headerIcon dateIcon" />
-          <div className="dateDropdown">18/9/2025 </div>
+          <div
+            id="dateDropdown"
+            className="dateDropdown"
+            onClick={() => setIsDateOpen(true)}
+          >
+            {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
+              date[0].endDate,
+              "dd/MM/yyyy"
+            )}`}
+          </div>
+          {isDateOpen && (
+            <div ref={dateRef} className="date">
+              <DateRange
+                ranges={date}
+                onChange={(item) => setDate([item.selection])}
+                minDate={new Date()}
+              />
+            </div>
+          )}
+
           <span className="seperator"></span>
         </div>
         <div className="headerSearchItem">
