@@ -6,10 +6,17 @@ import "react-date-range/dist/styles.css"; // main style file (react-date-range)
 import "react-date-range/dist/theme/default.css"; // theme css file (react-date-range)
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 function Header() {
-  const [destination, setDestination] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams("");
+  const [destination, setDestination] = useState(
+    searchParams.get("destination") ?? ""
+  );
 
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [options, setOptions] = useState({ adult: 1, children: 0, room: 1 });
