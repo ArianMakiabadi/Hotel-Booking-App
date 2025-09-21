@@ -1,7 +1,7 @@
 import { MdLocationOn } from "react-icons/md";
 import { HiCalendar, HiMinus, HiPlus, HiSearch } from "react-icons/hi";
 import { useRef, useState } from "react";
-import useOutsideClick from "../../hooks/useOutsideClick";
+import useOutsideClick from "../hooks/useOutsideClick";
 import "react-date-range/dist/styles.css"; // main style file (react-date-range)
 import "react-date-range/dist/theme/default.css"; // theme css file (react-date-range)
 import { DateRange } from "react-date-range";

@@ -1,5 +1,5 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { useHotels } from "../../context/HotelsProvider";
+import { useHotels } from "../context/HotelsProvider";
 import { useState } from "react";
 
 function Map() {
