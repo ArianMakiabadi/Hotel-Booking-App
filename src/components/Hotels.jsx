@@ -12,7 +12,7 @@ function Hotels() {
         return (
           <Link
             key={item.id}
-            to={`/hotels/${item.id}?lat=${item.latitude}&lang=${item.longitude}`}
+            to={`/hotels/${item.id}?lat=${item.latitude}&lng=${item.longitude}`}
           >
             <div className="searchItem">
               <img src={item.xl_picture_url} alt={item.name} />
