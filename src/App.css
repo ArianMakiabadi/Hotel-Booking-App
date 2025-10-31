@@ -216,12 +216,22 @@
 .searchList .searchItem {
   display: flex;
   gap: 1rem;
+  align-items: center;
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+  transition: all 160ms ease;
 }
 .searchList .searchItem img {
   width: 6rem;
   height: 6rem;
   object-fit: cover;
   border-radius: 1rem;
+}
+
+.searchList .searchItem:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 10px 22px rgba(20, 40, 60, 0.08);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .searchItem .searchItemDesc p {
   margin-bottom: 0.3rem;
@@ -260,8 +270,52 @@
 }
 
 .searchItem.current-hotel {
-  border: 3px solid var(--primary-700);
+  border: 0;
   border-radius: 1rem;
+  padding: 0.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(250, 250, 255, 0.9)
+  );
+  box-shadow: 0 8px 20px rgba(20, 40, 60, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: relative;
+  transform: translateZ(0);
+}
+
+.current-badge {
+  position: absolute;
+  top: -3px;
+  left: 12px;
+  background: var(--primary-700);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.searchItem.current-hotel img {
+  width: 7.2rem;
+  height: 7.2rem;
+  border-radius: 0.8rem;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 18px rgba(20, 40, 60, 0.12);
+  object-fit: cover;
+}
+
+.searchItem.current-hotel .searchItemDesc .name {
+  color: var(--primary-800);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.searchItem.current-hotel .searchItemDesc .price {
+  color: var(--primary-700);
+  font-weight: 700;
 }
 
 @media screen and (min-width: 768px) {
